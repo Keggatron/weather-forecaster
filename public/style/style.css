@@ -1,0 +1,39 @@
+body {
+  background-image: url('http://artist-submarine-48713.netlify.com/app/images/pattern.svg');
+}
+
+.navigation {
+  background: #fc5a2c;
+  color: #fff;
+  padding: 5px;
+}
+
+h1 {
+  display: block;
+  font-size: 2em !important;
+  color: #fff !important;
+}
+
+.navbar>.container,
+.navbar>.container-fluid {
+  margin: 0;
+  width: 100%;
+}
+
+.inputs {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.column {
+  width: 500px;
+  vertical-align: middle;
+  display: table-cell;
+}
+
+.boxing {
+  width: 100%;
+  height: 100vh;
+  display: table;
+}
