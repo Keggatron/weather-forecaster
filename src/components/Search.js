@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Redirect, Link } from 'react-router-dom';
-import Forecast from './Forecast';
+import { Link } from 'react-router-dom';
+
 
 class Search extends Component {
   constructor(props) {
@@ -18,7 +18,7 @@ class Search extends Component {
 
   handleChange(event) {
     var value = event.target.value;
-
+    console.log('handled')
     this.setState(() => {
       return {
         city: value
@@ -27,13 +27,14 @@ class Search extends Component {
   }
 
 
+
   render() {
     const path = this.props.path;
     const city = this.state.city;
 
 
     return (
-      <div className='col-xs-6'>
+      <span>
         <form onSubmit = { this.handleSubmit }>
           <input 
             id='city'
@@ -43,20 +44,20 @@ class Search extends Component {
             value={this.state.city}
             className = 'form-control'
           />
-          </form>
-          <Link
-            className='btn btn-success'
-            to = {
-              {
-                pathname: path + 'forecast',
-                search: `?city=` + city
-              }
+        </form>
+        <Link
+          className='btn btn-success'
+          to = {
+            {
+              pathname: path + 'forecast',
+              search: `?city=` + city,
+              state: { city: this.state.city }
             }
-            disable={!this.state.city}
-          >
-            Get Weather
-          </Link>
-      </div>
+          }
+        >
+          Get Weather
+        </Link>
+      </span>
 
     )
   }

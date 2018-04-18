@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 const Details = (props) => {
   const selectedWeatherData = props.location.state;
@@ -6,7 +6,7 @@ const Details = (props) => {
 
   return (
     <div className='details-container'>
-      <img src={imgUri} />
+      <img src={imgUri} alt='weather icon'/>
       <p>{selectedWeatherData.selectedWeather.date}</p>
       <p>{selectedWeatherData.city}</p>
       <p>{selectedWeatherData.selectedWeather.weather[0].main}</p>

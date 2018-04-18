@@ -24,7 +24,10 @@ const WeatherGrid = (props) => {
                         selectedWeather: data,
                         city: props.forecast.city.name
                       }
-                    }}>
+                    }}
+            key={data.dt}        
+          >
+                    
             <div 
               key={data.dt}
               onClick={
@@ -32,7 +35,7 @@ const WeatherGrid = (props) => {
               }
               className='day-container'
             >
-              <img src= {imgUri}/>
+              <img src= {imgUri} alt='weather icon'/>
               <div>{todayString}</div>
             </div>
         </Link>
@@ -52,7 +55,7 @@ class Forecast extends Component {
       forecastData: null,
       error: null,
       loading: null,
-      selectedWeather: null
+      selectedWeather: null,
     }
     this.updateForecast = this.updateForecast.bind(this);
 
@@ -97,6 +100,45 @@ class Forecast extends Component {
       )
   }
 
+  componentWillReceiveProps(props) {
+    const city = queryString.parse(props.location.search)
+    api.fetchWeather([
+        city.city
+      ])
+      .then(data => {
+        if (data === null) {
+          return this.setState(() => {
+            return {
+              error: 'Looks like there was an error. Check that the city is spelled correctly',
+              loading: false
+            };
+          });
+        }
+        this.setState(() => {
+          return {
+            error: null,
+            forecastData: data,
+            loading: false
+          };
+        });
+      })
+      .then(console.log(city.city))
+      .then(api.fetchCurrentWeather([
+          city.city
+        ])
+        .then(weatherData => {
+          this.setState((currentState) => {
+            return {
+              error: currentState.error,
+              forecastData: currentState.forecastData,
+              loading: currentState.loading,
+              currentWeather: weatherData
+            }
+          })
+        })
+      )
+  }
+
   updateForecast(data) {
     this.setState(() => {
       return {
@@ -107,10 +149,8 @@ class Forecast extends Component {
 
 
   render() {
-    const error = this.state.error;
     const forecastData = this.state.forecastData;
-    const loading = this.state.loading;
-    const currentWeather = this.state.currentWeather;
+
 
     return (
       <div>
