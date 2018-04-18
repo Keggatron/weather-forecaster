@@ -46,6 +46,8 @@ const WeatherGrid = (props) => {
   )
 }
 
+
+
 class Forecast extends Component {
   constructor(props) {
     super(props)
@@ -62,45 +64,7 @@ class Forecast extends Component {
 
   }
 
-  componentDidMount() {
-    const city = queryString.parse(this.props.location.search)
-    api.fetchWeather([
-        city.city
-      ])
-      .then(data => {
-        if (data === null) {
-          return this.setState(() => {
-            return {
-              error: 'Looks like there was an error. Check that the city is spelled correctly',
-              loading: false
-            };
-          });
-        }
-        this.setState(() => {
-          return {
-            error: null,
-            forecastData: data,
-            loading: false
-          };
-        });
-      })
-      .then(api.fetchCurrentWeather([
-          city.city
-        ])
-        .then(weatherData => {
-          this.setState((currentState) => {
-            return {
-              error: currentState.error,
-              forecastData: currentState.forecastData,
-              loading: currentState.loading,
-              currentWeather: weatherData
-            }
-          })
-        })
-      )
-  }
-
-  componentWillReceiveProps(props) {
+  renderWeather = (props) => {
     const city = queryString.parse(props.location.search)
     api.fetchWeather([
         city.city
@@ -122,7 +86,6 @@ class Forecast extends Component {
           };
         });
       })
-      .then(console.log(city.city))
       .then(api.fetchCurrentWeather([
           city.city
         ])
@@ -137,6 +100,14 @@ class Forecast extends Component {
           })
         })
       )
+  }
+
+  componentDidMount() {
+    this.renderWeather(this.props);
+  }
+
+  componentWillReceiveProps(props) {
+    this.renderWeather(props);
   }
 
   updateForecast(data) {
