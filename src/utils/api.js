@@ -3,9 +3,6 @@ import axios from 'axios';
 const API_KEY = 'b714ec74bbab5650795063cb0fdf5fbe'
 const ROOT_URL = `https://api.openweathermap.org/data/2.5/`;
 
-// http: //api.openweathermap.org/data/2.5/forecast/daily?q=edmonton&type=accurate&APPID=b714ec74bbab5650795063cb0fdf5fbe&cnt=5
-// 593639932eb1b9ceaed82025e01fbf09
-
 const api = {
   fetchWeather(city) {
     const url = `${ROOT_URL}forecast/daily?q=${city}&type=accurate&APPID=${API_KEY}&cnt=5`;

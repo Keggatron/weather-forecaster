@@ -7,12 +7,14 @@ function Header() {
     <Navbar className='navigation'>
       <Navbar.Header>
         <Navbar.Brand>
-          <h1>Clever Title</h1>
+          <h1>Five Day Weather Forecast</h1>
         </Navbar.Brand>
       </Navbar.Header>
       <Nav pullRight>
-        <NavItem>
-          <Search />
+        <NavItem className='header-search'>
+          <div className='row'>
+            <Search path='/'/>
+          </div>  
         </NavItem>
       </Nav>      
     </Navbar>

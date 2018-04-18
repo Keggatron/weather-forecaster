@@ -3,7 +3,8 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import Header from './Header';
 import Search from './Search';
 import Forecast from './Forecast';
-import Details from './Details'
+import Details from './Details';
+import Index from './Index';
 
 class App extends Component {
   render() {
@@ -12,9 +13,9 @@ class App extends Component {
         <div>
           <Header /> 
           <Switch>
-            <Route exact path='/' component={Search} />
-            <Route exact path='/forecast' component={Forecast} />
-            <Route exact path='/details' component={Details} />
+            <Route exact path='/' component={Index} />
+            <Route path='/forecast' component={Forecast} />
+            <Route path='/details' component={Details} />
           </Switch>
         </div>
       </BrowserRouter>

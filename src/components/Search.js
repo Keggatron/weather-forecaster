@@ -28,36 +28,36 @@ class Search extends Component {
 
 
   render() {
-    const match = this.props.match;
+    const path = this.props.path;
     const city = this.state.city;
 
 
     return (
-      <div className='container boxing' align='center'>
-        <form className='column' onSubmit={this.handleSubmit}>
-          <label> <h1>Enter a City</h1> </label>
+      <div className='col-xs-6'>
+        <form onSubmit = { this.handleSubmit }>
           <input 
             id='city'
             type='text' 
             placeholder='enter city' 
             onChange={this.handleChange}
             value={this.state.city}
+            className = 'form-control'
           />
           </form>
           <Link
             className='btn btn-success'
             to = {
               {
-                pathname: match.path + 'forecast',
+                pathname: path + 'forecast',
                 search: `?city=` + city
               }
             }
-              disable={!this.state.city}
+            disable={!this.state.city}
           >
             Get Weather
           </Link>
-        
       </div>
+
     )
   }
 }

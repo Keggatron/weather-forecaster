@@ -7,9 +7,7 @@ import api from '../utils/api';
 const WeatherGrid = (props) => {
 
   return (
-
-    <ul className='grid'>
-    
+    <div className='row weather-grid'>
       {props.forecast.list.map((data, index) => {
         var someDate = new Date();
         var numberOfDaysToAdd = index;
@@ -27,21 +25,20 @@ const WeatherGrid = (props) => {
                         city: props.forecast.city.name
                       }
                     }}>
-            <li 
+            <div 
               key={data.dt}
               onClick={
               props.onSelect.bind(null, data)
-              
-                
               }
+              className='day-container'
             >
               <img src= {imgUri}/>
               <div>{todayString}</div>
-            </li>
+            </div>
         </Link>
         )
       })}
-    </ul>
+   </div>
 
   )
 }
@@ -114,19 +111,21 @@ class Forecast extends Component {
     const forecastData = this.state.forecastData;
     const loading = this.state.loading;
     const currentWeather = this.state.currentWeather;
-    console.log(this.state.forecastData)
-
 
     return (
       <div>
       {!this.state.forecastData 
-      ? <div>Loading</div> 
-      : <WeatherGrid 
-          forecast={forecastData}
-          onSelect={this.updateForecast}
-        />
+      ? <h2>Loading...</h2> 
+      : <div className='container'>
+          <h2>{this.state.forecastData.city.name}</h2>
+          <WeatherGrid 
+            forecast={forecastData}
+            onSelect={this.updateForecast}
+          />
+        </div>
       }
-    </div>
+      </div>
+
     )
   }
 }
